@@ -2,12 +2,10 @@ name = "ens"
 main = "build/worker/shim.mjs"
 compatibility_date = "2023-03-22"
 
-routes = [
-    { pattern = "ens.ethfollow.xyz", custom_domain = true }
-]
+routes = [{ pattern = "ens.ethfollow.xyz", custom_domain = true }]
 
 kv_namespaces = [
-    { binding = "ENSTATE-1", id = "0599fbc043374063bb0fc67f275f89b3" },
+    { binding = "ENSTATE-1", id = "6d860f01a338425d85c102cda7898303" },
 ]
 
 [build]
