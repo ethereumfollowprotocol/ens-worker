@@ -2,5 +2,8 @@
   "git.autofetch": true,
   "git.confirmSync": false,
   "git.enableCommitSigning": true,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "files.associations": {
+    "wrangler.json": "jsonc"
+  }
 }
