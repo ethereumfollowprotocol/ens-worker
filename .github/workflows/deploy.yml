@@ -30,9 +30,6 @@ jobs:
         working-directory: shared
         run: cargo build --release
 
-      - name: Build worker
-        run: cargo build --release
-
       - name: Set up Bun
         uses: oven-sh/setup-bun@v1
         with:
