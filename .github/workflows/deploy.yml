@@ -1,0 +1,50 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  CARGO_TERM_COLOR: always
+  ACTIONS_RUNNER_DEBUG: true
+
+jobs:
+  deploy-worker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+
+      - run: |
+          rustup set auto-self-update disable
+          rustup toolchain install stable --profile minimal
+
+      - uses: Swatinem/rust-cache@v2.7.0
+
+      - name: Build shared
+        working-directory: shared
+        run: cargo build --release
+
+      - name: Build worker
+        run: cargo build --release
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: 'latest'
+
+      - name: Install Dependencies
+        run: |
+          bun install
+          bun add --global wrangler@latest
+
+      - name: Deploy Cloudflare Workers
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: wrangler deploy

@@ -1,0 +1,17 @@
+name = "ens"
+main = "build/worker/shim.mjs"
+compatibility_date = "2023-03-22"
+
+routes = [
+    { pattern = "ens.ethfollow.xyz", custom_domain = true }
+]
+
+kv_namespaces = [
+    { binding = "ENSTATE-1", id = "0599fbc043374063bb0fc67f275f89b3" },
+]
+
+[build]
+command = "cargo install --quiet worker-build && worker-build --release"
+
+[vars]
+OPENSEA_API_KEY = "05888bbd4e9848de868e854d81b9b5e2"
