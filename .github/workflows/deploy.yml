@@ -21,18 +21,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
+      - name: Get App Version
+        id: version
+        run: |
+          export VERSION="$(jq --raw-output '.version' package.json)"
+          echo "APP_VERSION=${VERSION}" >> $GITHUB_ENV
+
       - run: |
           rustup set auto-self-update disable
           rustup toolchain install stable --profile minimal
 
       - uses: Swatinem/rust-cache@v2.7.0
         with:
-          prefix-key: ${{ env.NAME }}v0 # increment this to bust the cache if needed
-
-      - name: Configure sccache
-        run: |
-          echo "RUSTC_WRAPPER=sccache" >> $GITHUB_ENV
-          echo "SCCACHE_GHA_ENABLED=true" >> $GITHUB_ENV
+          prefix-key: v0 # increment this to bust the cache if needed
 
       - name: Install sccache
         uses: mozilla-actions/sccache-action@v0.0.3
