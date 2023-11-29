@@ -5,6 +5,7 @@ use worker::{event, Context, Cors, Env, Method, Request, Response};
 
 use crate::lookup::LookupType;
 
+mod docs;
 mod http_util;
 mod kv_cache;
 mod lookup;
@@ -27,6 +28,10 @@ struct AppVersion {
 async fn main(req: Request, env: Env, _ctx: Context) -> worker::Result<Response> {
     if req.path() == "/" {
         return root_handler().with_cors(&CORS);
+    }
+
+    if req.path() == "/docs" {
+        return docs_handler().with_cors(&CORS);
     }
 
     let opensea_api_key = env
@@ -52,4 +57,8 @@ fn root_handler() -> Response {
         compile_time: env!("STATIC_BUILD_DATE").to_string(),
     })
     .expect("from_json should've succeeded")
+}
+
+fn docs_handler() -> Response {
+    Response::from_html(docs::swagger::swagger_html_str()).expect("from_html should've succeeded")
 }
