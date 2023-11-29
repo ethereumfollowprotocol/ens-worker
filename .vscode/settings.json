@@ -4,6 +4,8 @@
   "git.enableCommitSigning": true,
   "editor.formatOnSave": true,
   "files.associations": {
-    "wrangler.json": "jsonc"
+    "wrangler.json": "jsonc",
+    ".dev.vars": "dotenv",
+    ".dev.vars.example": "dotenv"
   }
 }

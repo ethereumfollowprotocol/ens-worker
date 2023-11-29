@@ -14,6 +14,3 @@ kv_namespaces = [
 
 [build]
 command = "cargo install --quiet worker-build && worker-build --release"
-
-[vars]
-OPENSEA_API_KEY = "05888bbd4e9848de868e854d81b9b5e2"
