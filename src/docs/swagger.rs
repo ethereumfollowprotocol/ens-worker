@@ -225,7 +225,6 @@ fn openapi_spec() -> Result<Value> {
     Ok(openapi_spec)
 }
 
-// reads swagger.html file and replaces `{{swagger_json}}` with the contents of the swagger.json file
 pub fn swagger_html_str() -> std::string::String {
     let swagger_html_string = "
       <!doctype html>
