@@ -68,7 +68,7 @@ impl From<KVCacheJsError> for CacheError {
 #[async_trait(?Send)]
 impl CacheLayer for CloudflareKVCache {
     async fn get(&self, key: &str) -> Result<String, CacheError> {
-        let kv_store = get_js(&self.ctx, "enstate-1")?;
+        let kv_store = get_js(&self.ctx, "ENSTATE-1")?;
         let get_function_value = get_js(&kv_store, "get")?;
 
         let get_function = get_function_value
@@ -94,7 +94,7 @@ impl CacheLayer for CloudflareKVCache {
     }
 
     async fn set(&self, key: &str, value: &str, expires: u32) -> Result<(), CacheError> {
-        let kv_store = get_js(&self.ctx, "enstate-1")?;
+        let kv_store = get_js(&self.ctx, "ENSTATE-1")?;
         let put_function_value = get_js(&kv_store, "put")?;
 
         let put_function = put_function_value
