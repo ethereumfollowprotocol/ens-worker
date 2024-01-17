@@ -9,7 +9,7 @@ mode = "smart"
 routes = [{ pattern = "ens.ethfollow.xyz", custom_domain = true }]
 
 kv_namespaces = [
-    { binding = "ENSTATE-1", id = "6d860f01a338425d85c102cda7898303" },
+    { binding = "ENSTATE-1", id = "c2f0cac721664128bc917e2cd0608875" },
 ]
 
 [build]
